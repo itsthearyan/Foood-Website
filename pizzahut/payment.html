@@ -17,9 +17,11 @@
         const razorpayKey = 'rzp_test_muM4XagPTCA9UV';
 
         document.getElementById('payButton').addEventListener('click', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const value = urlParams.get('value');
             const options = {
                 key: razorpayKey,
-                amount: 1000, // Example amount in paise (1 INR)
+                amount: value*100, // Example amount in paise (1 INR)
                 currency: 'INR',
                 name: 'Food on Table',
                 description: 'Product Purchase',
