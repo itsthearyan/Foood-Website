@@ -96,6 +96,9 @@ const addCartToHTML = () => {
     }
     iconCartSpan.innerText = totalQuantity;
     document.getElementById('totalAmount').innerText = `Total: ₹${totalAmount}`;
+    document.getElementById('paymentval').href = `phpay.html?value=${totalAmount}`
+    // Sending the total amount to the payment page (phpay.html) in paise
+    window.parent.postMessage({ totalAmount: totalAmount * 100 }, '*');
 };
 
 listCartHTML.addEventListener('click', (event) => {
@@ -140,11 +143,13 @@ function calculateTotalAmount() {
         return total + (product.price * cart.quantity);
     }, 0);
 
-    document.getElementById('totalAmount').innerText = `Total: $${totalAmount}`;
+    document.getElementById('totalAmount').innerText = `Total: ₹${totalAmount}`;
+    document.getElementById('paymentval').href = `phpay.html?value=${totalAmount}`;
+    
 }
 
 const initApp = () => {
-    fetch("products.json")
+    fetch("ph.json")
         .then(response => response.json())
         .then(data => {
             listProducts = data;
